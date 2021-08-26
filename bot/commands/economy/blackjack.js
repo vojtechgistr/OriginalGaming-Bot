@@ -98,8 +98,7 @@ module.exports = {
 
 
                 const stand = msg.createReactionCollector(standFilter, {
-                    time: 60000,
-                    max: 1
+                    time: 60000
                 });
                 const hit = msg.createReactionCollector(hitFilter, {
                     time: 60000
@@ -138,7 +137,7 @@ module.exports = {
                         .addField(`${message.author.username}'s hand `, `Cards: [\`${playerArray}\`](https://discord.com/)\nTotal: \`${playerCount}\``, true)
                         .addField(`${bot.user.username}'s hand`, `Cards: **[\`${botArray}\`](https://discord.com/)**\nTotal: \`${botCount}\``, true)
                         .setColor(green_light)
-                        .setDescription(`**You won the blackjack game!** GG my guy\nYou won ${bet}<:Mana:627845086851629056> mana. Your total balance is now ${Math.round(bal+bet*1.5)}<:Mana:627845086851629056>`);
+                        .setDescription(`**You won the blackjack game!** GG my guy\nYou won ${bet}<:Mana:627845086851629056> mana. Your total balance is now ${Math.ceil(bal+bet*1.5)}<:Mana:627845086851629056>`);
                         hit.stop();
                         stand.stop();
                         msg.edit(embed);
@@ -177,7 +176,7 @@ module.exports = {
                         .addField(`${message.author.username}'s hand `, `Cards: [\`${playerArray}\`](https://discord.com/)\nTotal: \`${playerCount}\``, true)
                         .addField(`${bot.user.username}'s hand`, `Cards: **[\`${botArray}\`](https://discord.com/)**\nTotal: \`${botCount}\``, true)
                         .setColor(green_light)
-                        .setDescription(`**You won the blackjack game!** GG my guy\nYou won ${bet}<:Mana:627845086851629056> mana. Your total balance is now ${Math.round(bal+bet*1.5)}<:Mana:627845086851629056>`);
+                        .setDescription(`**You won the blackjack game!** GG my guy\nYou won ${bet}<:Mana:627845086851629056> mana. Your total balance is now ${Math.ceil(bal+bet*1.5)}<:Mana:627845086851629056>`);
                         hit.stop();
                         stand.stop();
                         msg.edit(embed);
@@ -217,7 +216,7 @@ module.exports = {
                         .addField(`${message.author.username}'s hand `, `Cards: [\`${playerArray}\`](https://discord.com/)\nTotal: \`${playerCount}\``, true)
                         .addField(`${bot.user.username}'s hand`, `Cards: **[\`${botArray}\`](https://discord.com/)**\nTotal: \`${botCount}\``, true)
                         .setColor(green_light)
-                        .setDescription(`**You won the blackjack game!** GG my guy\nYou won ${bet}<:Mana:627845086851629056> mana. Your total balance is now ${Math.round(bal+bet*1.5)}<:Mana:627845086851629056>`);
+                        .setDescription(`**You won the blackjack game!** GG my guy\nYou won ${bet}<:Mana:627845086851629056> mana. Your total balance is now ${Math.ceil(bal+bet*1.5)}<:Mana:627845086851629056>`);
                         hit.stop();
                         stand.stop();
                         msg.edit(embed);
@@ -256,7 +255,7 @@ module.exports = {
                         .addField(`${message.author.username}'s hand `, `Cards: [\`${playerArray}\`](https://discord.com/)\nTotal: \`${playerCount}\``, true)
                         .addField(`${bot.user.username}'s hand`, `Cards: **[\`${botArray}\`](https://discord.com/)**\nTotal: \`${botCount}\``, true)
                         .setColor(green_light)
-                        .setDescription(`**You won the blackjack game!** GG my guy\nYou won ${bet}<:Mana:627845086851629056> mana. Your total balance is now ${Math.round(bal+bet*1.5)}<:Mana:627845086851629056>`);
+                        .setDescription(`**You won the blackjack game!** GG my guy\nYou won ${bet}<:Mana:627845086851629056> mana. Your total balance is now ${Math.ceil(bal+bet*1.5)}<:Mana:627845086851629056>`);
                         hit.stop();
                         stand.stop();
                         msg.edit(embed);
@@ -282,7 +281,7 @@ module.exports = {
                         .addField(`${message.author.username}'s hand `, `Cards: [\`${playerArray}\`](https://discord.com/)\nTotal: \`${playerCount}\``, true)
                         .addField(`${bot.user.username}'s hand`, `Cards: **[\`${botArray}\`](https://discord.com/)**\nTotal: \`${botCount}\``, true)
                         .setColor(green_light)
-                        .setDescription(`**You won the blackjack game!** GG my guy\nYou won ${bet}<:Mana:627845086851629056> mana. Your total balance is now ${Math.round(bal+bet*1.5)}<:Mana:627845086851629056>`);
+                        .setDescription(`**You won the blackjack game!** GG my guy\nYou won ${bet}<:Mana:627845086851629056> mana. Your total balance is now ${Math.ceil(bal+bet*1.5)}<:Mana:627845086851629056>`);
                         hit.stop();
                         stand.stop();
                         msg.edit(embed);
@@ -295,7 +294,7 @@ module.exports = {
                         .addField(`${message.author.username}'s hand `, `Cards: [\`${playerArray}\`](https://discord.com/)\nTotal: \`${playerCount}\``, true)
                         .addField(`${bot.user.username}'s hand`, `Cards: **[\`${botArray}\`](https://discord.com/)**\nTotal: \`${botCount}\``, true)
                         .setColor(green_light)
-                        .setDescription(`**You won the blackjack game!** GG my guy\nYou won ${bet}<:Mana:627845086851629056> mana. Your total balance is now ${Math.round(bal+bet*1.5)}<:Mana:627845086851629056>`);
+                        .setDescription(`**You won the blackjack game!** GG my guy\nYou won ${bet}<:Mana:627845086851629056> mana. Your total balance is now ${Math.ceil(bal+bet*1.5)}<:Mana:627845086851629056>`);
                         hit.stop();
                         stand.stop();
                         msg.edit(embed);
@@ -359,7 +358,7 @@ module.exports = {
                         .addField(`${message.author.username}'s hand `, `Cards: [\`${playerArray}\`](https://discord.com/)\nTotal: \`${playerCount}\``, true)
                         .addField(`${bot.user.username}'s hand`, `Cards: **[\`${botArray}\`](https://discord.com/)**\nTotal: \`${botCount}\``, true)
                         .setColor(green_light)
-                        .setDescription(`**You won the blackjack game!** GG my guy\nYou won ${bet}<:Mana:627845086851629056> mana. Your total balance is now ${Math.round(bal+bet*1.5)}<:Mana:627845086851629056>`);
+                        .setDescription(`**You won the blackjack game!** GG my guy\nYou won ${bet}<:Mana:627845086851629056> mana. Your total balance is now ${Math.ceil(bal+bet*1.5)}<:Mana:627845086851629056>`);
                         hit.stop();
                         stand.stop();
                         msg.edit(embed);
@@ -398,7 +397,7 @@ module.exports = {
                         .addField(`${message.author.username}'s hand `, `Cards: [\`${playerArray}\`](https://discord.com/)\nTotal: \`${playerCount}\``, true)
                         .addField(`${bot.user.username}'s hand`, `Cards: **[\`${botArray}\`](https://discord.com/)**\nTotal: \`${botCount}\``, true)
                         .setColor(green_light)
-                        .setDescription(`**You won the blackjack game!** GG my guy\nYou won ${bet}<:Mana:627845086851629056> mana. Your total balance is now ${Math.round(bal+bet*1.5)}<:Mana:627845086851629056>`);
+                        .setDescription(`**You won the blackjack game!** GG my guy\nYou won ${bet}<:Mana:627845086851629056> mana. Your total balance is now ${Math.ceil(bal+bet*1.5)}<:Mana:627845086851629056>`);
                         hit.stop();
                         stand.stop();
                         msg.edit(embed);

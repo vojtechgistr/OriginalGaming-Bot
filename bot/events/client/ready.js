@@ -1,19 +1,19 @@
     const Discord = require('discord.js');
     const { MessageEmbed } = require('discord.js');
     const { green_light } = require('../../colours.json');
+    const { default_prefix } = require('../../botconfig.json');
     const fs = require('fs');
-    const config = require('../../botconfig.json');
 
     module.exports = async bot => {
     console.log("-------------------------");
     console.log("    I AM READY TO GO     ");
     console.log("-------------------------");
 
-    let loginchannel = bot.channels.cache.get(config.logchannel);
+    let loginchannel = bot.channels.cache.get('627846724609769491');
 
     let loginEmbed = new MessageEmbed()
     .setTitle('SUCCESSFULLY LOGGED IN')
-    .setDescription('✅ Bot is now online')
+    .setDescription('<:agree:782705809142448159> Bot is now online')
     .setColor(green_light);
 
     loginchannel.send(loginEmbed)
@@ -86,7 +86,7 @@
     // status
     setInterval(function() {
      setTimeout(async() => {
-        bot.user.setActivity('--help | @Ultimate Power', { type: 'PLAYING'})
+        bot.user.setActivity(`${default_prefix}help | @Ultimate Power`, { type: 'PLAYING'})
         setTimeout(async() => {
             bot.user.setActivity(`DEV - ${bot.users.cache.get(`484448041609199620`).tag}`, { type: 'STREAMING', url: "https://www.twitch.tv/darealadalbert"})
             setTimeout(async() => {

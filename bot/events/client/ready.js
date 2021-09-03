@@ -69,10 +69,13 @@ setInterval(() => {
                 bot.guilds.cache.get(fileData[key].guildID).channels.cache.get(fileData[key].channelID).send(`An unknown error happened during the draw of the giveaway **${fileData[key].item}**`);
 
             } else {
-                let thiss = new MessageEmbed().setTitle(fileData[key].item).setDescription(`**__Winners__:** ${winnerString}\n\n**__GIVEAWAY HAS ENDED__**`).setColor('0xC0C0C0').setTimestamp().setFooter('Ended')
+                
+                let host = await bot.users.cache.get(fileData[key].host)
+                
+                let thiss = new MessageEmbed().setTitle(fileData[key].item).setDescription(`**__Winners__:** ${winnerString}\n\n**__GIVEAWAY HAS ENDED__**`).setColor('0xC0C0C0').setFooter(`Hosted by ${host.tag} | Ended at`).setTimestamp(fileData[key].end)
                 const GWembed = await bot.guilds.cache.get(fileData[key].guildID).channels.cache.get(fileData[key].channelID).messages.fetch(fileData[key].messageID)
                 GWembed.edit(thiss)
-
+                bot.guilds.cache.get(fileData[key].guildID).channels.cache.get(fileData[key].channelID).send(`🎉 **${winnerString}**has won the giveaway **${fileData[key].item}** ! Congratulations ! 🎉`);
                 
                 fileData[key].lastWinners = winners
                 fileData[key].stillgoing = false

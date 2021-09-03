@@ -15,7 +15,7 @@ const prompts = [
 module.exports = {
     config: {
         name: "giveaway",
-        category: "basic",
+        category: "moderation",
         accessableby: "Members",
         aliases: ["gw"],
     },
@@ -140,6 +140,7 @@ module.exports = {
             Object.keys(fileData).forEach(async key => {
                 if(key === `${message.guild.id}|${channel.id}|${messageData.id}`) {
                     if(fileData[key].stillgoing === true) return message.inlineReply(`This giveaway isn't over yet!`)
+                    
                     const embedSent = await bot.guilds.cache.get(fileData[key].guildID).channels.cache.get(fileData[key].channelID).messages.fetch(fileData[key].messageID)
 
                     const peopleReactedBot = await embedSent.reactions.cache.get("🎉").users.fetch();
@@ -185,14 +186,16 @@ module.exports = {
                             winners.push(peopleReacted[index].id)
                             finalUpdate.push(peopleReacted[index].id)
                             lastIndex = index
-                            console.log(winners)
+
                         }
 
                     }
                     fs.writeFileSync(fileName, JSON.stringify(fileData, null, '\t'));
                     if(winners.length < fileData[key].winnersNumber) return message.inlineReply(`Not enough participants to execute the draw of the giveaway **${fileData[key].item}**`);
-                    console.log(finalUpdate)
-                    message.channel.send(`New winners: ` + winnerString)
+
+                    let thiss = new MessageEmbed().setTitle(fileData[key].item).setDescription(`**__Winners__:** ${winnerString}\n\n**__GIVEAWAY HAS ENDED__**`).setColor('0xC0C0C0').setTimestamp().setFooter('Ended')
+                    const GWembed = await bot.guilds.cache.get(fileData[key].guildID).channels.cache.get(fileData[key].channelID).messages.fetch(fileData[key].messageID)
+                    GWembed.edit(thiss)
 
                     return
                 }

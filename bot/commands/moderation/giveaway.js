@@ -72,6 +72,7 @@ module.exports = {
                             winnersNumber: response.winners,
                             stillgoing: true,
                             item: response.prize,
+                            host: message.author.id,
                             end: Date.now() + ms(response.duration)
                         };
 
@@ -193,7 +194,9 @@ module.exports = {
                     fs.writeFileSync(fileName, JSON.stringify(fileData, null, '\t'));
                     if(winners.length < fileData[key].winnersNumber) return message.inlineReply(`Not enough participants to execute the draw of the giveaway **${fileData[key].item}**`);
 
-                    let thiss = new MessageEmbed().setTitle(fileData[key].item).setDescription(`**__Winners__:** ${winnerString}\n\n**__GIVEAWAY HAS ENDED__**`).setColor('0xC0C0C0').setTimestamp().setFooter('Ended')
+                    let host = await bot.users.cache.get(fileData[key].host)
+                    
+                    let thiss = new MessageEmbed().setTitle(fileData[key].item).setDescription(`**__Winners__:** ${winnerString}\n\n**__GIVEAWAY HAS ENDED__**`).setColor('0xC0C0C0').setTimestamp().setFooter(`Hosted by ${host.tag} | Ended at`).setTimestamp(fileData[key].end)
                     const GWembed = await bot.guilds.cache.get(fileData[key].guildID).channels.cache.get(fileData[key].channelID).messages.fetch(fileData[key].messageID)
                     GWembed.edit(thiss)
 

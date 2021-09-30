@@ -26,9 +26,6 @@ setInterval(() => {
     Object.keys(fileData).forEach(async key => {
         if (Date.now() > fileData[key].end && fileData[key].stillgoing === true) {
 
-            var winners = []
-            var winnerString = ""
-
             try {
                 const embedSent = await bot.guilds.cache.get(fileData[key].guildID).channels.cache.get(fileData[key].channelID).messages.fetch(fileData[key].messageID)
 
@@ -47,22 +44,61 @@ setInterval(() => {
                 return bot.guilds.cache.get(fileData[key].guildID).channels.cache.get(fileData[key].channelID).send(`Not enough participants to execute the draw of the giveaway **${fileData[key].item}**`);
 
             } else {
+                var index
+                var winnerString = ""
+                var winners = []
+                var finalUpdate = fileData[key].lastWinners
+
                 var lastIndex = 0
+                var lastWinners = fileData[key].lastWinners
+
+                if(lastWinners == undefined) {
+                    fileData[key].lastWinners = []
+                    lastWinners = fileData[key].lastWinners
+                }
+                if(finalUpdate == undefined) {
+                    fileData[key].lastWinners = []
+                    finalUpdate = fileData[key].lastWinners
+                }
+
+                
 
                 for (var z = 0; z < parseInt(fileData[key].winnersNumber); z++) {
                     if(winners.length == parseInt(fileData[key].winnersNumber)) break
+                    
                     for (var x = 0; x < peopleReacted.length; x++) {
                         if(winners.length == parseInt(fileData[key].winnersNumber)) break
-                        
+
                         index = Math.floor(Math.random() * peopleReacted.length);
 
                         if (index == lastIndex) index = Math.floor(Math.random() * peopleReacted.length);
-                        if (winners.includes(peopleReacted[index].id)) index = Math.floor(Math.random() * peopleReacted.length);
+                        if (lastWinners.includes(peopleReacted[index].id)) {
+                            for(var i = 0;i < 11; i++) {
+                                if(i === 10) return message.inlineReply(`Not enough participants to execute the draw of the giveaway **${fileData[key].item}**`);
+                                
+                                index = Math.floor(Math.random() * peopleReacted.length);
+                                if(!lastWinners.includes(peopleReacted[index].id)) break
+                            }
+                        }
+
                         winnerString += "<@" + peopleReacted[index].id + "> "
+                        winners.push(peopleReacted[index].id)
+                        finalUpdate.push(peopleReacted[index].id)
+                        lastIndex = index
+
                     }
-                    winners.push(peopleReacted[index].id)
-                    lastIndex = index
+
                 }
+                fs.writeFileSync(fileName, JSON.stringify(fileData, null, '\t'));
+                if(winners.length < fileData[key].winnersNumber) return message.inlineReply(`Not enough participants to execute the draw of the giveaway **${fileData[key].item}**`);
+
+                let host = await bot.users.cache.get(fileData[key].host)
+                
+                let thiss = new MessageEmbed().setTitle(fileData[key].item).setDescription(`**__Winners__:** ${winnerString}\n\n**GIVEAWAY HAS ENDED**`).setColor('0xC0C0C0').setTimestamp().setFooter(`Hosted by ${host.tag} | Ended at`).setTimestamp(fileData[key].end)
+                
+                const GWembed = await bot.guilds.cache.get(fileData[key].guildID).channels.cache.get(fileData[key].channelID).messages.fetch(fileData[key].messageID)
+                GWembed.edit(thiss)
+
 
             }
             if (!winners) {
@@ -72,7 +108,7 @@ setInterval(() => {
                 
                 let host = await bot.users.cache.get(fileData[key].host)
                 
-                let thiss = new MessageEmbed().setTitle(fileData[key].item).setDescription(`**__Winners__:** ${winnerString}\n\n**__GIVEAWAY HAS ENDED__**`).setColor('0xC0C0C0').setFooter(`Hosted by ${host.tag} | Ended at`).setTimestamp(fileData[key].end)
+                let thiss = new MessageEmbed().setTitle(fileData[key].item).setDescription(`**__Winners__:** ${winnerString}\n\n**GIVEAWAY HAS ENDED**`).setColor('0xC0C0C0').setFooter(`Hosted by ${host.tag} | Ended at`).setTimestamp(fileData[key].end)
                 const GWembed = await bot.guilds.cache.get(fileData[key].guildID).channels.cache.get(fileData[key].channelID).messages.fetch(fileData[key].messageID)
                 GWembed.edit(thiss)
                 bot.guilds.cache.get(fileData[key].guildID).channels.cache.get(fileData[key].channelID).send(`🎉 **${winnerString}**has won the giveaway **${fileData[key].item}** ! Congratulations ! 🎉`);

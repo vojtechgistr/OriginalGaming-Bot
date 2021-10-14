@@ -85,13 +85,13 @@ module.exports = {
                 if(bonusSection == 0) {
                     let gainedBonus = Math.round(bal*1.5)
                     embed.setColor('0x00FF00')
-                    embed.setDescription(bonus[0] + `\n\n**You gained ${gainedBonus} <:Mana:627845086851629056>**`)
+                    embed.setDescription(bonus[0] + `\n\n**You gained ${gainedBonus} <:Mana:627845086851629056>**\n**All mana in your wallet has been doubled.** *This is a jackpot! Send us screen on the support server to be put in the hall of fame!*`)
                     message.inlineReply(embed)
                     return db.add(`money_${message.author.id}`, gainedBonus);
                 } else {
                     let lostBonus = Math.round(bal*0.25)
                     embed.setColor('0xFF0000')
-                    embed.setDescription(bonus[1] + `\n\n**You lost ${lostBonus} <:Mana:627845086851629056>**`)
+                    embed.setDescription(bonus[1] + `\n\n**You lost ${lostBonus} <:Mana:627845086851629056>**\n**You lost 75% of all your mana.** *This is a jackpot! Send us screen on the support server to be put in the hall of fame!*`)
                     message.inlineReply(embed)
                     return db.add(`money_${message.author.id}`, lostBonus);
                 }

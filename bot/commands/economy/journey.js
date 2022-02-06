@@ -22,7 +22,7 @@ const plus = [
     "You see an odd shaped cactus in the shadows as you travel the night. It creeps up to someone else with it's dark, square shaped eyes, hisses, and explodes. You decide to stay away from those, as it might be a good idea.",
     "You come across the most beautiful girl you have ever laid your eyes on. Truly a body sculpted by the gods themselves. You are about to say hello, until you realise she is wearing socks with her sandals. You run away.",
     "You are walking down a path surrounded by trees and you get ambushed by a bandit. You attack the bandit and you manage to defeat him. Well done!",
-    "A marked transport carriage passes by you. It has the markings of a prisoner or slave transport carriage. You hear what sounds  like a loud scream come from the inside of the transport and then silence.",
+    "A marked transport carriage passes by you. It has the markings of a prisoner or slave transport carriage. You hear what sounds like a loud scream come from the inside of the transport and then silence.",
     "Some magicians can walk on water. You can swim on land.",
     "I hope this game becomes popular. If it does, I'll be jetting my way towards the Bahamas and leaving all of these suckers behi.. whoops... note to myself: don't use journey texts as a developer log.",
     "On your way to the village, you caught a lizard. You then walked up to a merchant and told them it was a very rare baby dragon. They believed you, somehow, and gave you a flask of Mana.",
@@ -76,7 +76,7 @@ module.exports = {
 
             if(bal < 100) return message.inlineReply(`You can't generate money, dumbass! Make some money first.`);
             
-
+            
             let section = random(1, 100)
             if(section == 29) {
                 db.set(`journey_${message.author.id}`, Date.now());
@@ -85,13 +85,13 @@ module.exports = {
                 if(bonusSection == 0) {
                     let gainedBonus = Math.round(bal*1.5)
                     embed.setColor('0x00FF00')
-                    embed.setDescription(bonus[0] + `\n\n**You gained ${gainedBonus} <:Mana:627845086851629056>**\n**All mana in your wallet has been doubled.** *This is a jackpot! Send us screen on the support server to be put in the hall of fame!*`)
+                    embed.setDescription(bonus[0] + `\n\n**You gained ${gainedBonus} <:Mana:627845086851629056>**\n**All mana in your wallet has been doubled.** *This is a jackpot! Send us a screen on the support server to be put in the hall of fame!*`)
                     message.inlineReply(embed)
                     return db.add(`money_${message.author.id}`, gainedBonus);
                 } else {
                     let lostBonus = Math.round(bal*0.25)
                     embed.setColor('0xFF0000')
-                    embed.setDescription(bonus[1] + `\n\n**You lost ${lostBonus} <:Mana:627845086851629056>**\n**You lost 75% of all your mana.** *This is a jackpot! Send us screen on the support server to be put in the hall of fame!*`)
+                    embed.setDescription(bonus[1] + `\n\n**You lost ${lostBonus} <:Mana:627845086851629056>**\n**You lost 75% of all your mana.** *This is a jackpot! Send us a screen on the support server to be put in the hall of fame!*`)
                     message.inlineReply(embed)
                     return db.add(`money_${message.author.id}`, lostBonus);
                 }
@@ -99,8 +99,14 @@ module.exports = {
 
             } else if(section > 29 && section != 29) {
                 db.set(`journey_${message.author.id}`, Date.now());
-                let num = random(0, plus.length)
+                let num = random(0, plus.length-1)
                 let gained = random(100, 1000)
+
+                if(plus[num] == undefined) {
+                    embed.setDescription(plus[1] + `\n\n**You gained ${gained} <:Mana:627845086851629056>**`)
+                } else {
+                    embed.setDescription(plus[num] + `\n\n**You gained ${gained} <:Mana:627845086851629056>**`)
+                }
 
                 embed.setDescription(plus[num] + `\n\n**You gained ${gained} <:Mana:627845086851629056>**`)
                 embed.setColor('0xB2FF66')
@@ -109,13 +115,19 @@ module.exports = {
 
             } else if(section < 29 && section != 29) {
                 db.set(`journey_${message.author.id}`, Date.now());
-                let num = random(0, minus.length)
+                let num = random(0, minus.length-1)
                 let lost = random(100, 5000)
                 if(lost > bal) {
                     lost = bal
                 }
 
-                embed.setDescription(minus[num] + `\n\n**You lost ${lost} <:Mana:627845086851629056>**`)
+                if(minus[num] == undefined) {
+                    embed.setDescription(minus[1] + `\n\n**You lost ${lost} <:Mana:627845086851629056>**`)
+                } else {
+                    embed.setDescription(minus[num] + `\n\n**You lost ${lost} <:Mana:627845086851629056>**`)
+                }
+
+                
                 embed.setColor('0xFF3333')
                 message.inlineReply(embed)
                 return db.add(`money_${message.author.id}`, lost*-1);

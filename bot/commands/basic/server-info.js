@@ -38,7 +38,7 @@ module.exports = {
         .addField("**Server Name:**", `${message.guild.name}`, false)
         .addField("**Server Owner:**", `${own} [owner id: ${message.guild.ownerID}]`, false)
         .addField("**User Count:**", `**${message.guild.members.cache.size}** total, **${message.guild.members.cache.filter(member => !member.user.bot).size}** users, **${message.guild.members.cache.filter(member => member.user.bot).size}** bots`, false)
-        .addField("**Server Created At:**", `${moment(message.guild.createdAt).format("MMMM Do YYYY, h:mm:ss a")}`, false)
+        .addField("**Server Created At:**", `<t:${Math.trunc(message.guild.createdAt.getTime()/1000)}>`, false)
         .addField("**Server Level:**", `Level **${message.guild.premiumTier}** - **${message.guild.premiumSubscriptionCount}** server boosts`, false)
         .addField("**Channel Count:**", `**${texts}** text, **${voices}** voice, **${categories}** categories`, false)
         .addField("**Role Count:**", `${message.guild.roles.cache.size}`, false)

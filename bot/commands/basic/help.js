@@ -25,7 +25,7 @@ module.exports = {
                 .setColor("#e4b400")
                 .setDescription(`Bot's prefix is currently \`${default_prefix}\``)
                 .addField(`:pager: General`, '`help`, `uptime`, `support`, `server-info`, `thanksto`, `about`, `ping`, `user-info`')
-                .addField(`:rofl: Fun`, '`8ball`, `embed`, `say`, `rps`')
+                .addField(`:rofl: Fun`, '`8ball`, `embed`, `say`, `rps`, `karma`')
                 .addField(`${mana} Economy`, '`balance`, `blackjack`, `journey`, `daily`, `deposit`, `withdraw`, `pay`, `rob`, `fish`')
                 .addField(`:crown: Moderation`, '`ban`, `unban`, `kick`, `lock`, `unlock`, `mutevoice`/`mv`, `unmutevoice`/`unmv`, `slowmode`, `clear`, `notice`, `giveaway`')
                 return message.inlineReply(em);
@@ -37,7 +37,7 @@ module.exports = {
                 .setColor("#e4b400")
                 .setDescription(`Bot's prefix is currently \`${default_prefix}\``)
                 .addField(`:pager: General`, '`help`, `uptime`, `support`, `server-info`, `thanksto`, `about`, `ping`, `user-info`')
-                .addField(`:rofl: Fun`, '`8ball`, `embed`, `say`, `rps`')
+                .addField(`:rofl: Fun`, '`8ball`, `embed`, `say`, `rps`, `karma`')
                 .addField(`${mana} Economy`, '`balance`, `blackjack`, `journey`, `daily`, `deposit`, `withdraw`, `pay`, `rob`, `fish`')
                 .addField(`:crown: Moderation`, '`ban`, `unban`, `kick`, `lock`, `unlock`, `mutevoice`/`mv`, `unmutevoice`/`unmv`, `slowmode`, `clear`, `notice`, `giveaway`')
                 message.inlineReply(em);
@@ -48,7 +48,7 @@ module.exports = {
                 .setColor("#e4b400")
                 .setDescription(`Bot's prefix is currently \`${default_prefix}\``)
                 .addField(`:pager: General`, '`help`, `uptime`, `support`, `server-info`, `thanksto`, `about`, `ping`, `user-info`')
-                .addField(`:rofl: Fun`, '`8ball`, `embed`, `say`, `rps`')
+                .addField(`:rofl: Fun`, '`8ball`, `embed`, `say`, `rps`, `karma`')
                 .addField(`${mana} Economy`, '`balance`, `blackjack`, `journey`, `daily`, `deposit`, `withdraw`, `pay`, `rob`, `fish`')
                 .addField(`:crown: Moderation`, '`ban`, `unban`, `kick`, `lock`, `unlock`, `mutevoice`/`mv`, `unmutevoice`/`unmv`, `slowmode`, `clear`, `notice`, `giveaway`')
                 .addField(`:wrench: Admin`, '`addadmin`, `removeadmin`, `blacklist`, `unblacklist`, `blacklisted`, `eval`, `reloadcmd`')

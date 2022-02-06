@@ -69,8 +69,8 @@ module.exports = {
 	    .addField("**Avatar:**", `[Link to avatar](${user.user.displayAvatarURL({ dynamic: true })})`, true)
         .addField("**Game:**", `${user.presence.game || 'Not playing a game'}`, true)
         .addField("**Blacklisted:**", `${blacklist}`, true)
-        .addField("**Joined on this server:**", moment(message.member.guild.members.cache.get(user.id).joinedAt).format("MMMM Do YYYY, h:mm:ss a"), true)
-        .addField("**Account Created at:**", moment(message.member.guild.members.cache.get(user.id).user.createdAt).format("MMMM Do YYYY, h:mm:ss a"), true)
+        .addField("**Joined on this server:**", `<t:${Math.trunc(message.member.guild.members.cache.get(user.id).joinedAt.getTime()/1000)}>`, true)
+        .addField("**Account Created at:**", `<t:${Math.trunc(message.member.guild.members.cache.get(user.id).user.createdAt.getTime()/1000)}>`, true)
         .addField("**Highest server role:**", rolee, true)
         .setFooter(`Requested by ${message.author.username}#${message.author.discriminator}`, message.author.displayAvatarURL());
     message.channel.send(sEmbed);

@@ -29,10 +29,11 @@ module.exports = {
             .setDescription("You don't have enough permissions to use this command. \n - Required permission -> ``MANAGE SERVER``")
             .setColor('#d12828');
     
-            if (!message.member.hasPermission('MANAGE_SERVER')) {
+            if (!message.member.hasPermission('MANAGE_GUILD')) {
                 message.channel.send(embed2)
-                .then(msg => {msg.delete(7000)});
+                .then(msg => {msg.delete({timeout: 7000})});
                 return message.delete({ timeout: 7000 });
+                
             } else {
                 // buttons
                 let enableButton = new MessageButton()
@@ -58,6 +59,7 @@ module.exports = {
                 // setup Message
                 let setupMsg = new MessageEmbed()
                 .setTitle(`⭕ Karma - Setup Page`)
+                .setFooter(`Author - ` + message.author.id)
                 .setColor('0xFF4500');
 
                 if(karmaGuild.enabled == false) {
@@ -78,7 +80,7 @@ module.exports = {
 
         }
 
-        if(karmaGuild.enabled == false) return message.channel.send(new MessageEmbed().setDescription(`This feature is not enabled yet. You can enable it by typing \`${default_prefix}karma setup\` command.`));
+        if(karmaGuild.enabled == false) return message.channel.send(new MessageEmbed().setDescription(`This feature is not enabled yet. You can enable it by typing \`${default_prefix}karma setup\` command.\n\n*Requires you to have \`MANAGE SERVER\` permision.*`));
         
         if(args[0] == "top" || args[0] == "leaderboard" || args[0] == "board") {
             const board = await modules.mongodb.collections.karmaData.find({guild_id: message.guild.id}).sort({amount: -1}).toArray();
@@ -102,7 +104,7 @@ module.exports = {
         } else if(args[0] == "help") {
             let helpEmbed = new MessageEmbed()
                 .setTitle(`⭕ Karma - Help Page`)
-                .setDescription(`\`${default_prefix}karma [user]\` - shows user's karma\n\`${default_prefix}karma top\` - shows karma server leaderboard\n\`${default_prefix}karma setup\` - runs a server setup\n\`${default_prefix}karma list\` - shows list of karma emojis\n\`${default_prefix}karma help\` - shows this page`)
+                .setDescription(`Karma is a user-based score for other users, add or remove it by giving a said **emoji reactions** to their messages!\n\n\`${default_prefix}karma [user]\` - shows user's karma\n\`${default_prefix}karma top\` - shows karma server leaderboard\n\`${default_prefix}karma setup\` - runs a server setup\n\`${default_prefix}karma list\` - shows list of karma emojis\n\`${default_prefix}karma help\` - shows this page`)
                 .setColor('0xFF4500')
             return message.channel.send(helpEmbed);
             
